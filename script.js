@@ -65,7 +65,7 @@ fetch('https://jsonplaceholder.typicode.com/todos/', {
 // NOTE: the weakness of this function is that we don't know 
 // in what order we will receive each response.
 
-(function(obj) {
+let newObject = function(obj) {
     const url = 'https://jsonplaceholder.typicode.com/';
 
     fetch(url + 'posts/')
@@ -84,6 +84,8 @@ fetch('https://jsonplaceholder.typicode.com/todos/', {
     .catch(err => console.log(`ERROR IN TODOS!!! ${err}`));
 
     console.log(obj);
-})({});
+};
+
+newObject({});
 
 
