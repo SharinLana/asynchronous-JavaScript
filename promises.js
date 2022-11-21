@@ -36,7 +36,12 @@ const massiveProcess = function (num) {
 
 massiveProcess(10)
   .then((res) => console.log(`The result is: ${res}`))
-  .catch((err) => console.log(`ERROR! ${err}`));
+  .catch((err) => console.log(`ERROR! ${err}`))
+  .finally(() =>
+    console.log(
+      "I am the finally() method. I will be executed regardless of what happened to the promise (whether it is resloved or rejected)!\n For example, you can use me to close/clean up tasks in Node.js"
+    )
+  );
 
 // Some syncronous code
 console.log(5 * 5);
