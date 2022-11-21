@@ -45,3 +45,39 @@ massiveProcess(10)
 
 // Some syncronous code
 console.log(5 * 5);
+
+// PROMISE.ALL()
+// A method that returns a promise and can be impelmented for an array of promises.
+// It can be fulfilled ONLY if all the promises in the array are resolved.
+// If one of them is rejected, the entire Promise.all will fail.
+// Also, the result will not be available until the last promise in the array is fulfilled
+// (so, if one of the promises takes 10 seconds to be resolved, and all the oters - only 1-2 seconds,
+// we'll have to wait for 10 seconds until the slowest one is resolved)
+
+let firstName = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+    //   resolve("Lana");
+      reject("Lana is rejected");
+    }, 1000);
+  });
+};
+
+let middleName = () => {
+  return new Promise((resolve, reject) => {
+    resolve("G.");
+  }, 2000);
+};
+
+let lastName = () => {
+  return new Promise((resolve, reject) => {
+    resolve("Sharin");
+  }, 4000);
+};
+
+let fullName = Promise.all([firstName(), middleName(), lastName()])
+  .then((res) => console.log(`${res[0]} ${res[1]} ${res[2]}`)) // Lana G. Sharin
+  .catch((err) => console.log("REJECTION: " + err));
+
+
+
