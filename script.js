@@ -58,6 +58,32 @@ fetch('https://jsonplaceholder.typicode.com/todos/', {
 .catch(rejected => console.log(`Unable to add a new todo: ${rejected}`))
 
 
+// Task 4
+// Get an object with arrays of posts, comments, todos from https://jsonplaceholder.typicode.com/
+// Use an immidiately invoked function
 
+// NOTE: the weakness of this function is that we don't know 
+// in what order we will receive each response.
+
+(function(obj) {
+    const url = 'https://jsonplaceholder.typicode.com/';
+
+    fetch(url + 'posts/')
+    .then(data => data.json())
+    .then(arrayOfPosts => obj.arrayOfPosts = arrayOfPosts)
+    .catch(err => console.log(`ERROR IN POSTS!!! ${err}`));
+
+    fetch(url + 'comments/')
+    .then(data => data.json())
+    .then(arrayOfComments => obj.arrayOfComments = arrayOfComments)
+    .catch(err => console.log(`ERROR IN COMMENTS!!! ${err}`));
+
+    fetch(url + 'todos/')
+    .then(data => data.json())
+    .then(arrOfTodos => obj.arrOfTodos = arrOfTodos)
+    .catch(err => console.log(`ERROR IN TODOS!!! ${err}`));
+
+    console.log(obj);
+})({});
 
 
