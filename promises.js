@@ -132,3 +132,22 @@ let newObject = function (obj1, obj2, obj3) {
   console.log(obj3);
 };
 newObject({}, {}, {});
+
+
+// ABORTING A PROMISE
+
+let controller;
+
+const fetchData = function(url) {
+    controller = new AbortController();
+    const signal = controller.signal;
+
+    // We can abort the promise by Using "signal" as a second param 
+    fetch(url, { signal })
+    .then(data => data.json())
+    .then (res => console.log(res)) // ERROR:  The user aborted a request.
+    .catch(err => console.log('ERROR: ', err.message))
+};
+
+fetchData('https://jsonplaceholder.typicode.com/todos');
+controller.abort();
