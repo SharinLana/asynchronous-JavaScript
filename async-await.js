@@ -96,10 +96,28 @@ const postTodo = async (obj) => {
     const result = await response.json();
 
     console.log(result);
-
   } catch (err) {
     console.error("ERROR!!! 💥", err);
   }
 };
 
 postTodo(todo);
+
+// Task 5
+// Create an object filled with posts
+// from "https://jsonplaceholder.typicode.com/"
+// Use an IIFE: immediately invoked function expression
+
+(async function (obj) {
+  try {
+    let url = "https://jsonplaceholder.typicode.com/";
+
+    const response = await fetch(`${url}posts/`);
+    const result = await response.json();
+    obj.result = result;
+    console.log(obj.result);
+
+  } catch (err) {
+    console.error("ERROR!!! Problem retrieving posts ", err);
+  }
+})({});
