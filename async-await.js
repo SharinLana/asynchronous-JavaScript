@@ -26,16 +26,43 @@ swapiFilms();
 const getPosts = async (userId) => {
   try {
     const allPosts = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      ).then((data) => data.json());
-    
-      //   using filter() method to find only the objects with a particular userId
-      const usersPosts = allPosts.filter((obj) => obj.userId === userId);
-    
-      return usersPosts;
+      "https://jsonplaceholder.typicode.com/posts"
+    ).then((data) => data.json());
+
+    //   using filter() method to find only the objects with a particular userId
+    const usersPosts = allPosts.filter((obj) => obj.userId === userId);
+
+    return usersPosts;
   } catch (err) {
-    console.error('ERROR!!! ', err);
+    console.error("ERROR!!! ", err);
   }
 };
 
-getPosts(1).then(res => console.log(res));
+getPosts(1).then((res) => console.log(res));
+
+// Task 3
+// Get movie planets by their number
+// using "https://swapi.dev/api/films"
+
+const moviePlanets = async (num) => {
+  url = "https://swapi.dev/api/films/";
+
+  try {
+    if (isNaN(num)) {
+      throw "You must pass in a number!";
+    }
+
+    const object = await fetch(`${url}${num}/`).then((data) => data.json());
+    const promises = object.planets.map((link) =>
+      fetch(link).then((data) => data.json())
+    );
+
+    for await (let planet of promises) {
+      console.log(planet.name);
+    }
+  } catch (err) {
+    console.error("ERROR!!! 💥", err);
+  }
+};
+
+moviePlanets(1);
