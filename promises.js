@@ -88,24 +88,47 @@ let theWinner = Promise.race([firstName(), middleName(), lastName()])
   .catch((err) => console.log(`REJECTION: ${err}`));
 
 // Task 3
-// Fill out the empty object with an array of posts, comments and todos
+// Fill out the empty objects with an array of posts, comments and todos
 // retrieved from https://jsonplaceholder.typicode.com/
+// Use Promise.all, Promise.allSettled, Promise.any
 
-let newObject = function (obj) {
+let newObject = function (obj1, obj2, obj3) {
   const url = "https://jsonplaceholder.typicode.com/";
 
   let promise1 = fetch(url + "posts/").then((data) => data.json());
-  let promise2 = fetch(url + "comments/").then((data) => data.json());
+  let promise2 = fetch(url + "commen/").then((data) => data.json());
   let promise3 = fetch(url + "todos/").then((data) => data.json());
 
   Promise.all([promise1, promise2, promise3])
-  .then(arrayofData => {
-    obj.posts = arrayofData[0];
-    obj.comments = arrayofData[1];
-    obj.todos = arrayofData[2];
-  })
-  .catch(err => console.log('Problem retrieving data: ', err))
+    .then((arrayofData) => {
+      obj1.posts = arrayofData[0];
+      obj1.comments = arrayofData[1];
+      obj1.todos = arrayofData[2];
+    })
+    .catch((err) => console.log("Problem retrieving data: ", err));
 
-   console.log(obj);
+  //   PROMISE.ALLSETTLED will return a value of each promises of the array
+  // even if one of them was rejected
+  Promise.allSettled([promise1, promise2, promise3])
+    .then((arrayofData) => {
+      obj2.posts = arrayofData[0];
+      obj2.comments = arrayofData[1];
+      obj2.todos = arrayofData[2];
+    })
+    .catch((err) => console.log("Problem retrieving data: ", err));
+
+  // PROMISE.ANY will return a value if just ONE of the promises in the array
+  // is fulfilled
+  Promise.any([promise1, promise2, promise3])
+    .then((arrayofData) => {
+      obj3.posts = arrayofData[0];
+      obj3.comments = arrayofData[1];
+      obj3.todos = arrayofData[2];
+    })
+    .catch((err) => console.log("Problem retrieving data: ", err));
+
+  console.log(obj1);
+  console.log(obj2);
+  console.log(obj3);
 };
-newObject({});
+newObject({}, {}, {});
