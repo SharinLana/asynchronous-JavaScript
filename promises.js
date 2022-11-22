@@ -57,22 +57,23 @@ console.log(5 * 5);
 let firstName = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-    //   resolve("Lana");
-      reject("Lana is rejected");
-    }, 1000);
+      resolve("Lana");
+    //   reject("Lana is rejected");
+    }, 0);
   });
 };
 
 let middleName = () => {
   return new Promise((resolve, reject) => {
     resolve("G.");
-  }, 2000);
+    // reject('G. is rejected!')
+  }, 0);
 };
 
 let lastName = () => {
   return new Promise((resolve, reject) => {
     resolve("Sharin");
-  }, 4000);
+  }, 1000);
 };
 
 let fullName = Promise.all([firstName(), middleName(), lastName()])
@@ -80,4 +81,9 @@ let fullName = Promise.all([firstName(), middleName(), lastName()])
   .catch((err) => console.log("REJECTION: " + err));
 
 
+// PROMISE.RACE()
+// Will return a promise for the fastest promise in the array
 
+let theWinner = Promise.race([firstName(), middleName(), lastName()])
+.then(res => console.log(res)) // G.
+.catch(err => console.log(`REJECTION: ${err}`))
