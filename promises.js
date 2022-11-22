@@ -58,7 +58,7 @@ let firstName = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve("Lana");
-    //   reject("Lana is rejected");
+      //   reject("Lana is rejected");
     }, 0);
   });
 };
@@ -80,10 +80,32 @@ let fullName = Promise.all([firstName(), middleName(), lastName()])
   .then((res) => console.log(`${res[0]} ${res[1]} ${res[2]}`)) // Lana G. Sharin
   .catch((err) => console.log("REJECTION: " + err));
 
-
 // PROMISE.RACE()
 // Will return a promise for the fastest promise in the array
 
 let theWinner = Promise.race([firstName(), middleName(), lastName()])
-.then(res => console.log(res)) // G.
-.catch(err => console.log(`REJECTION: ${err}`))
+  .then((res) => console.log(res)) // G.
+  .catch((err) => console.log(`REJECTION: ${err}`));
+
+// Task 3
+// Fill out the empty object with an array of posts, comments and todos
+// retrieved from https://jsonplaceholder.typicode.com/
+
+let newObject = function (obj) {
+  const url = "https://jsonplaceholder.typicode.com/";
+
+  let promise1 = fetch(url + "posts/").then((data) => data.json());
+  let promise2 = fetch(url + "comments/").then((data) => data.json());
+  let promise3 = fetch(url + "todos/").then((data) => data.json());
+
+  Promise.all([promise1, promise2, promise3])
+  .then(arrayofData => {
+    obj.posts = arrayofData[0];
+    obj.comments = arrayofData[1];
+    obj.todos = arrayofData[2];
+  })
+  .catch(err => console.log('Problem retrieving data: ', err))
+
+   console.log(obj);
+};
+newObject({});
