@@ -66,3 +66,40 @@ const moviePlanets = async (num) => {
 };
 
 moviePlanets(1);
+
+// Task 4
+// Create an async function that will take a todo object as a parameter
+// and add it to the jsonplaceholder site
+
+let todo = {
+  completed: false,
+  userId: 1,
+  title: "Learn Async-Await",
+};
+
+const postTodo = async (obj) => {
+  let url = "https://jsonplaceholder.typicode.com/todos/";
+
+  try {
+    if (typeof obj !== "object") {
+      throw "You must use an object as an argument!";
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+
+    const result = await response.json();
+
+    console.log(result);
+
+  } catch (err) {
+    console.error("ERROR!!! 💥", err);
+  }
+};
+
+postTodo(todo);
