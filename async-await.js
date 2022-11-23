@@ -121,3 +121,32 @@ postTodo(todo);
     console.error("ERROR!!! Problem retrieving posts ", err);
   }
 })({});
+
+// Task 6
+// Receive the pieces of data from 3 urls
+// Use Promise.all, async-await and IIFE
+
+(async function(obj) {
+    const url = "https://jsonplaceholder.typicode.com/";
+
+    try {
+        let promise1 = fetch(`${url}posts/`);
+        let promise2 = fetch(`${url}comments/`);
+        let promise3 = fetch(`${url}todos/`);
+    
+        let result = await Promise.all([promise1, promise2, promise3]);
+        
+        obj.posts = await result[0].json();
+        obj.comments = await result[1].json();
+        obj.todos = await result[2].json();
+        
+        console.log(obj); // {posts: Array(100), comments: Array(500), todos: Array(200)}
+
+        return obj;
+
+    } catch (err) {
+        console.error('ERROR!!! 💥', err)
+    }
+
+})({});
+
