@@ -94,3 +94,22 @@ console.log(it.next().value); // 'c'
 console.log(it.next().value); // 'd'
 console.log(it.next().value); // 'e'
 console.log(it.next()); // {value: undefined, done: true}
+
+
+// Task 3
+// Pass the value in the function (not out!)
+// using a genereator
+
+function *yieldConsole() {
+    let value = yield;
+    console.log(value);
+}
+
+let passValueIn = yieldConsole();
+console.log(passValueIn.next()); // the first iteration is needed to invoke the func
+console.log(passValueIn.next('The value has been passed in')); // The value has been passed in
+//{value: undefined, done: true}. The value is undefined because this function 
+// does not return anything. We just needed to pass the value in, not out.
+
+
+
