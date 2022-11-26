@@ -62,3 +62,16 @@ let result = fibonacci(0, 1, 10);
 console.log(result.next()); // {value: Array(3), done: false}; value: (5) [0, 1, 1, 2, 3]
 console.log(result.next()); //{value: Array(4), done: false}; value: (5) [0, 1, 1, 2, 3]
 console.log(result.next()); //{value: Array(5), done: false}; value: (5) [0, 1, 1, 2, 3]
+
+
+// Task 1
+//  Create a function that will produce a random number 
+// each time when we call the func with the next() method;
+const randomNum = function *(end) {
+    let result = Math.floor(Math.random() * end) + 1;
+    yield result;
+    return result;
+}
+
+let val = randomNum(45);
+console.log(val.next()); // {value: 1, done: false}
