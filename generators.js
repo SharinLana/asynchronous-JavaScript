@@ -24,3 +24,25 @@ NOTE: you CAN'T declare an arrow function as a generator.
 It has to ba a regular function.
 */
 
+// EXAMPLE 1
+
+const test = function *() {
+    let x = 10
+    yield x; 
+    yield x + 10;
+    yield x + 20;
+
+    return x + 30
+};
+
+let res = test();
+console.log('After generator'); // proof that a generator func does not block the code below
+console.log(res.next()); // {value: 10, done: false}
+console.log(res.next()); // {value: 20, done: false}
+console.log(res.next()); // {value: 30, done: false}
+console.log(res.next()); // {value: 40, done: true}
+
+
+
+
+
