@@ -26,23 +26,39 @@ It has to ba a regular function.
 
 // EXAMPLE 1
 
-const test = function *() {
-    let x = 10
-    yield x; 
-    yield x + 10;
-    yield x + 20;
+const test = function* () {
+  let x = 10;
+  yield x;
+  yield x + 10;
+  yield x + 20;
 
-    return x + 30
+  return x + 30;
 };
 
 let res = test();
-console.log('After generator'); // proof that a generator func does not block the code below
+console.log("After generator"); // proof that a generator func does not block the code below
 console.log(res.next()); // {value: 10, done: false}
 console.log(res.next()); // {value: 20, done: false}
 console.log(res.next()); // {value: 30, done: false}
 console.log(res.next()); // {value: 40, done: true}
 
+// EXAMPLE 2
+const fibonacci = function* (num1, num2, length) {
+  let arr = [num1, num2];
+  let res;
 
+  for (let i = 0; i < length; i++) {
+    res = num1 + num2;
+    num1 = num2;
+    num2 = res;
+    arr.push(res);
+    yield arr;
+  }
 
+  return arr;
+};
 
-
+let result = fibonacci(0, 1, 10);
+console.log(result.next()); // {value: Array(3), done: false}; value: (5) [0, 1, 1, 2, 3]
+console.log(result.next()); //{value: Array(4), done: false}; value: (5) [0, 1, 1, 2, 3]
+console.log(result.next()); //{value: Array(5), done: false}; value: (5) [0, 1, 1, 2, 3]
