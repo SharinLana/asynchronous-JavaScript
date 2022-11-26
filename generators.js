@@ -75,3 +75,22 @@ const randomNum = function *(end) {
 
 let val = randomNum(45);
 console.log(val.next()); // {value: 1, done: false}
+
+// Task 2 
+// Use a generator to create an "Iterator"
+// and extract the value for each iteration
+let array = ['a', 'b', 'c', 'd', 'e'];
+
+let iterator = function *(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        yield arr[i];
+    }
+}
+
+let it = iterator(array);
+console.log(it.next().value); // 'a'
+console.log(it.next().value); // 'b'
+console.log(it.next().value); // 'c'
+console.log(it.next().value); // 'd'
+console.log(it.next().value); // 'e'
+console.log(it.next()); // {value: undefined, done: true}
