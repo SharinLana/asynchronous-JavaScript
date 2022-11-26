@@ -112,4 +112,14 @@ console.log(passValueIn.next('The value has been passed in')); // The value has 
 // does not return anything. We just needed to pass the value in, not out.
 
 
+// Task 4
+// Pass the value OUT the function
+// using a genereator
+
+function *yieldconsole() {
+    let value = yield "Passing the value out: ";
+}
+
+let passValueOut = yieldconsole();
+console.log(passValueOut.next().value); // Passing the value out:
 
