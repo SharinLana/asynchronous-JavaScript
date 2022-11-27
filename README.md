@@ -3,7 +3,7 @@
 
 Some code examples for a better understanding of how asynchronous JavaScript works. 
 
-::: warning
+:::
 *The current branch is only about the ASYNC-AWAIT keywords.
 To view the examples of promises, fetch() method and generators, switch to the relevant branch*
 :::
