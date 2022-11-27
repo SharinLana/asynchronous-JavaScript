@@ -3,10 +3,8 @@
 
 Some code examples for a better understanding of how asynchronous JavaScript works. 
 
-:::
-*The current branch is only about the ASYNC-AWAIT keywords.
+> *The current branch is only about the ASYNC-AWAIT keywords.
 To view the examples of promises, fetch() method and generators, switch to the relevant branch*
-:::
 
 #### Other branches contain:
 * Branch "promises" - examples of promises
